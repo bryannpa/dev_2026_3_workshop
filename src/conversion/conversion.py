@@ -17,6 +17,9 @@ class Conversion:
         """
         pass
     
+        resultado = (celsius * 9/5) + 32
+        return resultado
+
     def fahrenheit_a_celsius(self, fahrenheit):
         """
         Convierte temperatura de Fahrenheit a Celsius.
