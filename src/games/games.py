@@ -1,3 +1,6 @@
+from random import random
+
+
 class Games:
     def piedra_papel_tijera(self, jugador1, jugador2):
         """
@@ -29,6 +32,14 @@ class Games:
             str: "correcto", "muy alto" o "muy bajo"
         """
         pass
+
+        if intento == numero_secreto:
+            return "correcto"
+        elif intento > numero_secreto:
+            return "muy alto"
+        else:
+            return "muy bajo"
+
     
     def ta_te_ti_ganador(self, tablero):
         """
@@ -46,6 +57,19 @@ class Games:
              [" ", " ", " "]] -> "X"
         """
         pass
+
+        if any(all(cell == "X" for cell in row) for row in tablero):
+            return "X"
+        if any(all(cell == "O" for cell in row) for row in tablero):
+            return "O"
+        if any(all(tablero[i][j] == "X" for i in range(3)) for j in range(3)):
+            return "X"
+        if any(all(tablero[i][j] == "O" for i in range(3)) for j in range(3)):
+            return "O"
+        if all(cell != " " for row in tablero for cell in row):
+            return "empate"
+        return "continua"
+
     
     def generar_combinacion_mastermind(self, longitud, colores_disponibles):
         """
@@ -63,7 +87,18 @@ class Games:
             -> ["rojo", "azul", "rojo", "verde"]
         """
         pass
+
+        import random
+
+        if longitud <= 0:
+            return []
+
+        else:
+            return [random.choice(colores_disponibles) for _ in range(longitud)]
+       
+        
     
+
     def validar_movimiento_torre_ajedrez(self, desde_fila, desde_col, hasta_fila, hasta_col, tablero):
         """
         Valida si un movimiento de torre en ajedrez es legal.
@@ -83,3 +118,22 @@ class Games:
             - No puede saltar sobre otras piezas
         """
         pass
+
+        if not (0 <= desde_fila < 8 and 0 <= desde_col < 8 and 0 <= hasta_fila < 8 and 0 <= hasta_col < 8):
+            return False
+
+        if desde_fila != hasta_fila and desde_col != hasta_col:
+            return False
+
+        if desde_fila == hasta_fila:
+            for col in range(min(desde_col, hasta_col) + 1, max(desde_col, hasta_col)):
+                if tablero[desde_fila][col] != " ":
+                    return False
+        else:
+            for fila in range(min(desde_fila, hasta_fila) + 1, max(desde_fila, hasta_fila)):
+                if tablero[fila][desde_col] != " ":
+                    return False
+
+        return True
+
+    
